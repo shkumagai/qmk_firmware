@@ -33,7 +33,11 @@ enum custom_keycodes {
 #define KC_BLVL BL_STEP
 #define KC_BRTG BL_BRTG
 
-#define KC_ENTS LSFT_T(KC_ENT)
+#define KC_SPCS LSFT_T(KC_SPC)
+#define KC_BSPS LSFT_T(KC_BSPC)
+#define KC_ESCC LCTL_T(KC_ESC)
+#define KC_CAEQ MT(MOD_LCTL | MOD_LALT, KC_EQL)
+
 #define KC_CAPW LGUI(LSFT(KC_3))        // Capture whole screen
 #define KC_CPYW LGUI(LSFT(LCTL(KC_3)))  // Copy whole screen
 #define KC_CAPP LGUI(LSFT(KC_4))        // Capture portion of screen
@@ -47,39 +51,39 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
    * |TAB | Q  | W  | E  | R  | T  |               | Y  | U  | I  | O  | P  | \  |
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
-   * |CTL | A  | S  | D  | F  | G  |               | H  | J  | K  | L  | ;  | '  |
+   * |LCTL| A  | S  | D  | F  | G  |               | H  | J  | K  | L  | ;  | '  |
    * |----+----+----+----+----+----+----.     ,----|----+----+----+----+----+----|
-   * |SFT | Z  | X  | C  | V  | B  |ESC |     |LGUI| N  | M  | ,  | .  | /  | =  |
+   * |LSFT| Z  | X  | C  | V  | B  |LGUI|     |ESCC| N  | M  | ,  | .  | /  |CAEQ|
    * `----+----+----+--+-+----+----+----/     \----+----+----+-+--+----+----+----'
-   *                   |LOWR|LALT|BSPC /       \ SPC |ENTS|RASE|
+   *                   |LALT|LOWR|BSPS /       \ SPCS|RASE|ENT |
    *                   `----+----+----'         `----+----+----+
    */
   [_QWERTY] = LAYOUT_kc(
     GRV , 1  , 2  , 3  , 4  , 5  ,                 6  , 7  , 8  , 9  , 0  ,MINS,
     TAB , Q  , W  , E  , R  , T  ,                 Y  , U  , I  , O  , P  ,BSLS,
     LCTL, A  , S  , D  , F  , G  ,                 H  , J  , K  , L  ,SCLN,QUOT,
-    LSFT, Z  , X  , C  , V  , B  ,ESC ,      LGUI, N  , M  ,COMM,DOT ,SLSH,EQL ,
-                      LOWR,LALT,BSPC,          SPC ,ENTS,RASE
+    LSFT, Z  , X  , C  , V  , B  ,LGUI,      ESCC, N  , M  ,COMM,DOT ,SLSH,CAEQ,
+                      LALT,LOWR,BSPS,          SPCS,RASE,ENT
   ),
 
   /* _LOWER
    * ,----+----+----+----+----+----.               ,----+----+----+----+----+----.
    * | ~  | !  | @  | #  | $  | %  |               | ^  | &  | *  | (  | )  | _  |
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
-   * |    | 1  | 2  | 3  | 4  | 5  |               |    |    |    |    | [  | ]  |
+   * |    | 1  | 2  | 3  | 4  | 5  |               | 6  | 7  | 8  | 9  | 0  | |  |
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
-   * |    | 6  | 7  | 8  | 9  | 0  |               |LEFT|DOWN| UP |RGHT|    |    |
+   * |    |    |    | -  | =  | \  |               |    | UP |    |    |    |    |
    * |----+----+----+----+----+----+----.     ,----|----+----+----+----+----+----|
-   * |    |    |    |    |    |    |    |     |    |    |    |    |    |    |    |
+   * |    |    |    | [  | ]  |    |    |     |    |LEFT|DOWN|RGHT|    |    |    |
    * `----+----+----+--+-+----+----+----/     \----+----+----+-+--+----+----+----'
    *                   |    |    |     /       \     |    |    |
    *                   `----+----+----'         `----+----+----+
    */
   [_LOWER] = LAYOUT_kc(
     TILD,EXLM, AT ,HASH,DLR ,PERC,                CIRC,AMPR,ASTR,LPRN,RPRN,UNDS,
-        , 1  , 2  , 3  , 4  , 5  ,                    ,    ,    ,    ,LBRC,RBRC,
-        , 6  , 7  , 8  , 9  , 0  ,                LEFT,DOWN, UP ,RGHT,    ,    ,
-        ,    ,    ,    ,    ,    ,    ,          ,    ,    ,    ,    ,    ,    ,
+        , 1  , 2  , 3  , 4  , 5  ,                 6  , 7  , 8  , 9  , 0  ,PIPE,
+        ,    ,    ,MINS,EQL ,BSLS,                    , UP ,    ,    ,    ,    ,
+        ,    ,    ,    ,LBRC,RBRC,    ,          ,LEFT,DOWN,RGHT,    ,    ,    ,
                           ,    ,    ,              ,    ,
   ),
 
@@ -87,20 +91,20 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
    * ,----+----+----+----+----+----.               ,----+----+----+----+----+----.
    * |F12 | F1 | F2 | F3 | F4 | F5 |               | F6 | F7 | F8 | F9 |F10 |F11 |
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
-   * |    |CAPW|CPYW|CAPP|CPYP|    |               |    | (  | )  |    |    |    |
+   * |    |CAPW|CPYW|CAPP|CPYP|    |               |    |    |    |    |    |    |
    * |----+----+----+----+----+----+               |----+----+----+----+----+----|
-   * |    |MUTE|VOLD|VOLU|PGUP|HOME|               |    | [  | ]  |    |    |    |
+   * |    |MUTE|VOLD|VOLU|PGUP|HOME|               |    |    |    |    |    |    |
    * |----+----+----+----+----+----+----.     ,----|----+----+----+----+----+----|
-   * |    |    |    |    |PGDN|END |    |     |    |    | {  | }  |    |    |    |
+   * |    |    |    |    |PGDN|END |    |     |    |    |    |    |    |    |    |
    * `----+----+----+--+-+----+----+----/     \----+----+----+-+--+----+----+----'
    *                   |    |    |     /       \     |    |    |
    *                   `----+----+----'         `----+----+----+
    */
   [_RAISE] = LAYOUT_kc(
     F12 , F1 , F2 , F3 , F4 , F5 ,                 F6 , F7 , F8 , F9 ,F10 ,F11 ,
-        ,CAPW,CPYW,CAPP,CPYP,    ,                    ,LPRN,RPRN,    ,    ,    ,
-        ,MUTE,VOLD,VOLU,PGUP,HOME,                    ,LBRC,RBRC,    ,    ,    ,
-        ,    ,    ,    ,PGDN,END ,    ,          ,    ,LCBR,RCBR,    ,    ,    ,
+        ,CAPW,CPYW,CAPP,CPYP,    ,                    ,    ,    ,    ,    ,    ,
+        ,MUTE,VOLD,VOLU,PGUP,HOME,                    ,    ,    ,    ,    ,    ,
+        ,    ,    ,    ,PGDN,END ,    ,          ,    ,    ,    ,    ,    ,    ,
                           ,    ,    ,              ,    ,
   ),
 
