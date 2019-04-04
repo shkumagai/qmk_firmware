@@ -20,9 +20,7 @@ enum custom_keycodes {
 #define KC_RAISE RAISE
 #define KC_RST RESET
 
-#define KC_ALTBS LALT_T(KC_BSPACE)      // act as LALT   when held, as BSPACE when tapped
-#define KC_CTEND LCTL_T(KC_END)         // act as LCTL   when held, as END    when tapped
-#define KC_SFENT LSFT_T(KC_ENTER)       // act as LSHIFT when held, as ENTER  when tapped
+#define KC_SFBSP LSFT_T(KC_BAPACE)      // act as LSHIFT when held, as BSPACE when tapped
 #define KC_SFSPC LSFT_T(KC_SPACE)       // act as LSHIFT when held, as SPACE  when tapped
 
 #define KC_CAPW LGUI(LSFT(KC_3))        // Capture whole screen
@@ -40,9 +38,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
        LCTL,  A  ,  S  ,  D  ,  F  ,  G  ,                    H  ,  J  ,  K  ,  L  , SCLN,QUOTE,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-       LGUI,  Z  ,  X  ,  C  ,  V  ,  B  , HOME,      CTEND,  N  ,  M  ,COMMA, DOT ,SLASH, RALT,
+       LALT,  Z  ,  X  ,  C  ,  V  ,  B  ,     ,           ,  N  ,  M  ,COMMA, DOT ,SLASH, RALT,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
-                              ALTBS,LOWER,SFSPC,      SFENT,RAISE, BSPC
+                               LGUI,LOWER,SFSPC,      SFBSP,RAISE,ENTER
   //                         `-----+-----+-----'     `-----+-----+-----'
   ),
 
@@ -50,9 +48,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
            , EXLM,  AT , HASH, DLR , PERC,                   CIRC, AMPR, ASTR, LPRN, RPRN,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           ,GRAVE,MINUS,EQUAL, BSLS,     ,                       , PGDN, PGUP, LBRC, RBRC,     ,
+           ,GRAVE,MINUS,EQUAL, BSLS,     ,                   HOME, PGUP,     , LBRC, RBRC,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           ,TILDE, UNDS, PLUS, PIPE,     ,                   LEFT, DOWN,  UP ,RIGHT,     ,     ,
+           ,TILDE, UNDS, PLUS, PIPE,     ,                   END , PGDN,     , LCBR, RCBR,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
            ,     ,     ,     ,     ,     ,     ,           ,     ,     ,     ,     ,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
@@ -64,11 +62,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
        F12 ,  F1 ,  F2 ,  F3 ,  F4 ,  F5 ,                    F6 ,  F7 ,  F8 ,  F9 , F10 , F11 ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           , CAPW, CPYW, CAPP, CPYP,     ,                       ,  7  ,  8  ,  9  ,     ,     ,
+           ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           , MUTE, VOLD, VOLU,     ,     ,                       ,  4  ,  5  ,  6  ,     ,     ,
+           , MUTE, VOLD, VOLU,     ,     ,                       ,     ,  UP ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-           ,     ,     ,     ,     ,     ,     ,           ,  0  ,  1  ,  2  ,  3  ,     ,     ,
+           ,     ,     ,     ,     ,     ,     ,           ,     , LEFT, DOWN,RIGHT,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
                                    ,     ,     ,           ,     ,
   //                         `-----+-----+-----'     `-----+-----+-----'
@@ -76,11 +74,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_ADJUST] = LAYOUT_kc(
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
-           ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
+       RST ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
+  // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
+           , CAPW, CPYW, CAPP, CPYP,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
            ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
-  // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           ,     ,     ,     , RST ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
            ,     ,     ,     ,     ,     ,     ,           ,     ,     ,     ,     ,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
