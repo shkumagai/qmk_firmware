@@ -5,7 +5,7 @@ extern keymap_config_t keymap_config;
 #define _QWERTY 0
 #define _LOWER 1
 #define _RAISE 2
-#define _ADJUST 16
+#define _ADJUST 3
 
 enum custom_keycodes {
   QWERTY = SAFE_RANGE,
@@ -15,14 +15,22 @@ enum custom_keycodes {
 };
 
 #define KC_ KC_TRNS
-
 #define KC_LOWER LOWER
 #define KC_RAISE RAISE
 #define KC_RST RESET
 
-#define KC_SFBSP LSFT_T(KC_BAPACE)      // act as LSHIFT when held, as BSPACE when tapped
-#define KC_SFSPC LSFT_T(KC_SPACE)       // act as LSHIFT when held, as SPACE  when tapped
+// layer
+#define KC_L_SPC LT(_LOWER, KC_SPC)
+#define KC_R_ENT LT(_RAISE, KC_ENT)
 
+// shift_t
+#define KC_S_TAB LSFT_T(KC_TAB)
+#define KC_S_QT LSFT_T(KC_QUOT)
+
+// ctl_t
+#define KC_C_BS LCTL_T(KC_BSPC)
+
+// shortcuts
 #define KC_CAPW LGUI(LSFT(KC_3))        // Capture whole screen
 #define KC_CPYW LGUI(LSFT(LCTL(KC_3)))  // Copy whole screen
 #define KC_CAPP LGUI(LSFT(KC_4))        // Capture portion of screen
@@ -32,27 +40,27 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_QWERTY] = LAYOUT_kc(
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
-       ESC ,  1  ,  2  ,  3  ,  4  ,  5  ,                    6  ,  7  ,  8  ,  9  ,  0  ,MINUS,
+           ,  1  ,  2  ,  3  ,  4  ,  5  ,                    6  ,  7  ,  8  ,  9  ,  0  ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-       TAB ,  Q  ,  W  ,  E  ,  R  ,  T  ,                    Y  ,  U  ,  I  ,  O  ,  P  , BSLS,
+       ESC ,  Q  ,  W  ,  E  ,  R  ,  T  ,                    Y  ,  U  ,  I  ,  O  ,  P  , BSLS,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-       LCTL,  A  ,  S  ,  D  ,  F  ,  G  ,                    H  ,  J  ,  K  ,  L  , SCLN,QUOTE,
+      S_TAB,  A  ,  S  ,  D  ,  F  ,  G  ,                    H  ,  J  ,  K  ,  L  , SCLN, S_QT,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-       LALT,  Z  ,  X  ,  C  ,  V  ,  B  ,     ,           ,  N  ,  M  ,COMMA, DOT ,SLASH, RALT,
+       LALT,  Z  ,  X  ,  C  ,  V  ,  B  , LCTL,       RCTL,  N  ,  M  , COMM, DOT , SLSH, RALT,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
-                               LGUI,LOWER,SFSPC,      SFBSP,RAISE,ENTER
+                               LCMD,L_SPC, C_BS,       C_BS,R_ENT, RCMD
   //                         `-----+-----+-----'     `-----+-----+-----'
   ),
 
   [_LOWER] = LAYOUT_kc(
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
+           ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
+  // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
            , EXLM,  AT , HASH, DLR , PERC,                   CIRC, AMPR, ASTR, LPRN, RPRN,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           ,GRAVE,MINUS,EQUAL, BSLS,     ,                   HOME, PGUP,     , LBRC, RBRC,     ,
-  // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           ,TILDE, UNDS, PLUS, PIPE,     ,                   END , PGDN,     , LCBR, RCBR,     ,
+           , MINS, EQL , GRV , BSLS, LBRC,                   RBRC,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-           ,     ,     ,     ,     ,     ,     ,           ,     ,     ,     ,     ,     ,     ,
+           , UNDS, PLUS, TILD, PIPE, LCBR,     ,           , RCBR,     ,     ,     ,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
                                    ,     ,     ,           ,     ,
   //                         `-----+-----+-----'     `-----+-----+-----'
@@ -64,9 +72,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
            ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           , MUTE, VOLD, VOLU,     ,     ,                       ,     ,  UP ,     ,     ,     ,
+           , CAPW, CPYW, HOME, PGUP,     ,                       ,     ,  UP ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-           ,     ,     ,     ,     ,     ,     ,           ,     , LEFT, DOWN,RIGHT,     ,     ,
+           , CAPP, CPYP, END , PGDN,     ,     ,           ,     , LEFT, DOWN, RGHT,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
                                    ,     ,     ,           ,     ,
   //                         `-----+-----+-----'     `-----+-----+-----'
@@ -76,11 +84,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   // ,-----+-----+-----+-----+-----+-----.                 ,-----+-----+-----+-----+-----+-----.
        RST ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
-           , CAPW, CPYW, CAPP, CPYP,     ,                       ,     ,     ,     ,     ,     ,
+           ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+                 |-----+-----+-----+-----+-----+-----|
            ,     ,     ,     ,     ,     ,                       ,     ,     ,     ,     ,     ,
   // |-----+-----+-----+-----+-----+-----+-----.     ,-----|-----+-----+-----+-----+-----+-----|
-           ,     ,     ,     ,     ,     ,     ,           ,     ,     ,     ,     ,     ,     ,
+           ,     ,     ,     ,     ,     ,     ,           ,     ,     ,     ,       ,     ,     ,
   // `-----+-----+-----+-----+-----+-----+-----+     +-----+-----+-----+-----+-----+-----+-----'
                                    ,     ,     ,           ,     ,
   //                         `-----+-----+-----'     `-----+-----+-----'
